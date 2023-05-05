@@ -6,8 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import com.faendir.rhino_android.RhinoAndroidHelper;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private RhinoAndroidHelper rhinoAndroidHelper;
     TextView resultTv, solutionTv;
     Button buttonC, buttonBrackOpen, buttonBrackClose;
     Button buttonDivide, buttonMultiply, buttonPlus, buttonMinus, buttonEquals;
@@ -66,8 +71,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             solutionTv.setText(resultTv.getText());
             return;
         }
+        if(buttonText.equals("C")){
+            dataToCalculate = dataToCalculate.substring(0,dataToCalculate.length()-1);
+        }else{
+            dataToCalculate = dataToCalculate+buttonText;
+        }
 
+        solutionTv.setText(dataToCalculate);
+        String finalResult = getResult(dataToCalculate);
+        if(finalResult.equals("Error")){
+            resultTv.setText(finalResult);
+        }
 
-        dataToCalculate = dataToCalculate+buttonText;
+    }
+    String getResult(String data){
+        try{
+            Context context = rhinoAndroidHelper.enterContext();
+            context.setOptimizationLevel(-1);
+            Scriptable scriptable = context.initStandardObjects();
+            String finalResult = context.evaluateString(scriptable, data, "Javascript", 1, null).toString();
+            return finalResult;
+        }catch (Exception e){
+            return "Error";
+        }
     }
 }

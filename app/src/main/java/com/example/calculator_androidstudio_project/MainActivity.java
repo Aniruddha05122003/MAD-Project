@@ -5,14 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.faendir.rhino_android.RhinoAndroidHelper;
-
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private RhinoAndroidHelper rhinoAndroidHelper;
     TextView resultTv, solutionTv;
     Button buttonC, buttonBrackOpen, buttonBrackClose;
     Button buttonDivide, buttonMultiply, buttonPlus, buttonMinus, buttonEquals;
@@ -86,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     String getResult(String data){
         try{
-            Context context = rhinoAndroidHelper.enterContext();
+            Context context = Context.enter();
             context.setOptimizationLevel(-1);
             Scriptable scriptable = context.initStandardObjects();
             String finalResult = context.evaluateString(scriptable, data, "Javascript", 1, null).toString();

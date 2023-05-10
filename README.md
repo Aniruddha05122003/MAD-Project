@@ -1,5 +1,6 @@
-# CalculatorAndroid
-Fully functionable calculator app in Android Studio
-Youtube Tutorial here : https://youtu.be/X3KQdwVlo1Q
+Basic Multi functional calculator
 
-![calculator](https://user-images.githubusercontent.com/68380115/169702523-1a5d826d-fb0f-4377-bc58-f62d4ca53535.jpg)
+Team Members:
+1. Aniruddha Pradhan 211B048
+2. Anushka Yadav 211B063
+3. Ashutosh Aditya 211B073
